@@ -58,6 +58,7 @@ def parse_arguments():
 
 	return parser.parse_args()
 
+# operating system detection
 def is_windows():
 	if (platform.system() == "Windows"):
 		return True
@@ -67,29 +68,29 @@ def is_windows():
 		print("Unsupported OS, quitting...")
 		exit()
 
+# set browser path according to os
 def browser_path():
 	if (is_windows()):
-		try:
-			return (
-				pathlib.Path(
-				"{}\\Google\\Chrome\\Application\\chrome.exe".format(
-					os.environ["PROGRAMFILES(X86)"]
-					)
+		return (
+			pathlib.Path(
+			"{}\\Google\\Chrome\\Application\\chrome.exe".format(
+				os.environ["PROGRAMFILES(X86)"]
 				)
 			)
-		except KeyError:
-			pass
+		)
 	else:
 		return (
 			pathlib.Path("chromium")
 		)
 
+# change date to target_datetime
 def change_date(target_datetime):
 	if (is_windows()):
 		os.system("date " + target_datetime.strftime("%m-%d-%y"))
 	else:
 		subprocess.run(shlex.split("sudo date -s '%s'" % target_datetime.isoformat()))
 
+# re-sync date and time before and after execution
 def resync_datetime():
 	if (is_windows()):
 		subprocess.run(["w32tm", "/resync"])
@@ -125,6 +126,7 @@ def make_noise(
 		BROWSER_PROCESS = subprocess.Popen([browser, smoke], stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
 		time.sleep(sleep_time)
 
+		# kill browser
 		BROWSER_PROCESS.terminate()
 
 
