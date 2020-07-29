@@ -43,9 +43,13 @@ WayBackBrowsing is a simple Python + JavaScript program that randomly opens site
 > 
 >
 > Arch (Manjaro...): `# pacman -S python`
+>
 > CentOS / RHEL: `# yum install python3`
+>
 > Debian / Ubuntu (*Ubuntu, Mint, Elementary, Pop! OS...): `# apt install python3 `
+>
 > Fedora: `# dnf install python3 `
+>
 > openSUSE / SLE: `# zypper in python3`
 
 > ### 2. Download <a id="dl">
